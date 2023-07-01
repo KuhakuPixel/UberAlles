@@ -5,13 +5,15 @@ import android.graphics.PixelFormat
 import android.hardware.input.InputManager
 import android.os.Build
 import android.view.WindowManager
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.kuhakupixel.atg.ui.overlay.service.FloatingService
-import com.kuhakupixel.atg.ui.overlay.service.OverlayViewController
-import com.kuhakupixel.atg.ui.overlay.service.ServiceState
+import com.kuhakupixel.libuberalles.ui.overlay.service.FloatingService
+import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
+import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
 import com.kuhakupixel.libuberalles.overlay.OVERLAY_BUTTON_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.overlay.logd
@@ -21,7 +23,8 @@ val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceStat
 class OverlayButtonController(
     val windowManager: WindowManager,
     val service: FloatingService,
-    val onClick: () -> Unit
+    val onClick: () -> Unit,
+    val content: @Composable () -> Unit,
 ) :
     OverlayInterface {
 
@@ -111,6 +114,7 @@ class OverlayButtonController(
                     onClick = {
                         onClick()
                     },
+                    buttonContent = content,
                 )
             }
         }

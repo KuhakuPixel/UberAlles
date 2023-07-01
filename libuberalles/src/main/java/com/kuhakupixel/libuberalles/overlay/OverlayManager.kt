@@ -3,9 +3,9 @@ package com.kuhakupixel.libuberalles.overlay
 import android.graphics.PixelFormat
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
-import com.kuhakupixel.atg.ui.overlay.service.FloatingService
-import com.kuhakupixel.atg.ui.overlay.service.OverlayComposeUI.OverlayChoicesDialog
-import com.kuhakupixel.atg.ui.overlay.service.OverlayComposeUI.OverlayInfoDialog
+import com.kuhakupixel.libuberalles.ui.overlay.service.FloatingService
+import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayChoicesDialog
+import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayInfoDialog
 import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayInputDialog
 
 class OverlayManager(

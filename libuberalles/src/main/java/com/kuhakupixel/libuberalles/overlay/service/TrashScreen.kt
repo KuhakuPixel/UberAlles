@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
-import com.kuhakupixel.atg.ui.overlay.service.ServiceState
+import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
 import com.kuhakupixel.libuberalles.overlay.composables.Trash
 
 @Composable

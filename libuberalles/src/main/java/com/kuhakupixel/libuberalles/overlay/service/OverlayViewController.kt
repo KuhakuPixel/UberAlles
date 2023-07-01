@@ -1,4 +1,4 @@
-package com.kuhakupixel.atg.ui.overlay.service
+package com.kuhakupixel.libuberalles.ui.overlay.service
 
 import android.util.Log
 import android.view.WindowManager
@@ -83,11 +83,10 @@ class OverlayViewController(
                 }
                 //
                 viewHolder = createOverlayViewHolder()
-                logd("${name}: adding view ${viewHolder!!.getView()}")
                 windowManager.addView(viewHolder!!.getView(), viewHolder!!.getParams())
-                Log.d("ATG", "View Spawned")
             }
         }
+        logd("${name}: adding view ${viewHolder!!.getView()}")
         enabledCount++
     }
 
@@ -100,9 +99,9 @@ class OverlayViewController(
 
             OverlayEnableDisableMode.CREATE_AND_DESTROY -> {
                 windowManager.removeView(viewHolder!!.getView())
-                Log.d("ATG", "View Destroyed")
             }
         }
+        logd("View Disabled")
     }
 
 }

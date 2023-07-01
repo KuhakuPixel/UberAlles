@@ -20,7 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.kuhakupixel.atg.ui.overlay.service.FloatingService
+import com.kuhakupixel.libuberalles.ui.overlay.service.FloatingService
 import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND
 import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND_OVERLAY_BUTTON_CREATE
 import com.kuhakupixel.libuberalles.overlay.OverlayPermission

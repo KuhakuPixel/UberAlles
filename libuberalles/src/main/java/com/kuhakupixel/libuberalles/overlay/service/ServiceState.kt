@@ -1,4 +1,4 @@
-package com.kuhakupixel.atg.ui.overlay.service
+package com.kuhakupixel.libuberalles.ui.overlay.service
 
 import com.kuhakupixel.libuberalles.overlay.service.OverlayState
 

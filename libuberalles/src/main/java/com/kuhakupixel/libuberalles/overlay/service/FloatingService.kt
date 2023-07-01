@@ -1,4 +1,4 @@
-package com.kuhakupixel.atg.ui.overlay.service
+package com.kuhakupixel.libuberalles.ui.overlay.service
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.IBinder
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.Text
 import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
 import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND
@@ -45,7 +46,9 @@ open class FloatingService() : Service() {
                         enableOverlayButton = false
                     }
                 },
-            )
+            ) {
+                Text("Button")
+            }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -74,7 +77,10 @@ open class FloatingService() : Service() {
         //
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             channelId =
-                createNotificationChannel("ATGOverlayButton", "ATG's overlay button service")
+                createNotificationChannel(
+                    "LibUberAllesOverlayButton",
+                    "LibUberAlles's overlay button service"
+                )
         }
 
         val notification: Notification =

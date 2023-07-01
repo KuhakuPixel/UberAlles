@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
-import com.kuhakupixel.atg.ui.overlay.service.ServiceState
+import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.overlay.logd
 import kotlin.math.max
@@ -22,7 +22,8 @@ fun ClickTarget(
     overlayState: OverlayState,
     viewHolder: OverlayViewHolder,
     onDropOnTrash: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    buttonContent: @Composable () -> Unit,
 ) {
     Button(
         modifier = Modifier
@@ -64,6 +65,6 @@ fun ClickTarget(
             },
         onClick = { onClick() },
     ) {
-        Text("ATG")
+        buttonContent()
     }
 }
