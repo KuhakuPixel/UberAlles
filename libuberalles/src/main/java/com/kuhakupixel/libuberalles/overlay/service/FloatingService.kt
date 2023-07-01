@@ -12,12 +12,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.material3.Text
 import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
-import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND
-import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND_OVERLAY_BUTTON_CREATE
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 
-open class FloatingService() : Service() {
+open class FloatingService : Service() {
     val state = ServiceState()
 
     // todo make private
@@ -58,13 +56,7 @@ open class FloatingService() : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         logd("FloatingService onStartCommand")
         startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
-
-        val command = intent!!.getStringExtra(INTENT_COMMAND)
-        when (command) {
-            INTENT_COMMAND_OVERLAY_BUTTON_CREATE -> {
-                overlayButtonController.enableView()
-            }
-        }
+        overlayButtonController.enableView()
         return START_STICKY
     }
 

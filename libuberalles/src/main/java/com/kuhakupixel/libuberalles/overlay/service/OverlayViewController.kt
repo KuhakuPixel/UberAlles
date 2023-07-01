@@ -77,7 +77,7 @@ class OverlayViewController(
                  * */
                 if (enabledCount >= 1) {
                     throw IllegalStateException(
-                        "Cannot reuse this view controller when [enableDisableMode] is set to [${this.enableDisableMode.toString()}] " +
+                        "Cannot reuse this view controller when [enableDisableMode] is set to [${this.enableDisableMode}] " +
                                 "because it is not thread safe when creating/destroying, a new instance is needed "
                     )
                 }
