@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
 import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND
-import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND_EXIT
 import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND_OVERLAY_BUTTON_CREATE
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
@@ -61,11 +60,6 @@ open class FloatingService() : Service() {
         when (command) {
             INTENT_COMMAND_OVERLAY_BUTTON_CREATE -> {
                 overlayButtonController.enableView()
-            }
-
-            INTENT_COMMAND_EXIT -> {
-                overlayButtonController.disableView()
-                return START_NOT_STICKY
             }
         }
         return START_STICKY
