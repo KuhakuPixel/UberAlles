@@ -17,7 +17,7 @@ import com.kuhakupixel.libuberalles.overlay.INTENT_COMMAND_OVERLAY_BUTTON_CREATE
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 
-class FloatingService() : Service() {
+open class FloatingService() : Service() {
     val state = ServiceState()
 
     // todo make private
