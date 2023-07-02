@@ -15,12 +15,11 @@ import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 
-open class FloatingService : Service() {
+open class UberAllesWindow : Service() {
     val state = ServiceState()
 
-    // todo make private
-    lateinit var overlayButtonController: OverlayButtonController
-    val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
+    private lateinit var overlayButtonController: OverlayButtonController
+    private val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
 
 
     fun onOverlayButtonClick() {

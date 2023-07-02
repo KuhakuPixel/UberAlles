@@ -4,7 +4,7 @@ import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
-import com.kuhakupixel.libuberalles.ui.overlay.service.FloatingService
+import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.libuberalles.overlay.service.overlayViewFactory
 
 class OverlayViewHolder(
@@ -12,7 +12,7 @@ class OverlayViewHolder(
     val windowManager: WindowManager,
     private val params: WindowManager.LayoutParams,
     val alpha: Float,
-    val service: FloatingService,
+    val service: UberAllesWindow,
 ) {
 
     private var view: ComposeView? = null
