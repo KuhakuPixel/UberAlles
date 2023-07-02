@@ -1,5 +1,6 @@
 package com.kuhakupixel.libuberalles.ui.overlay.service
 
+import com.kuhakupixel.libuberalles.overlay.OVERLAY_BUTTON_DEFAULT_SIZE_DP
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -43,6 +44,7 @@ open class UberAllesWindow : Service() {
                         enableOverlayButton = false
                     }
                 },
+                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP
             ) {
                 Text("Button")
             }

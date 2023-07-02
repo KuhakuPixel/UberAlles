@@ -2,7 +2,6 @@ package com.kuhakupixel.libuberalles.overlay.service
 
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -39,9 +38,9 @@ fun ClickTarget(
                             IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
                         val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
                         var x = max(_timerOffset.x, 0)
-                        x = min(x, serviceState.screenWidthPx - controller.timerSizePx)
+                        x = min(x, serviceState.screenWidthPx - controller.buttonRadiusPx)
                         var y = max(_timerOffset.y, 0)
-                        y = min(y, serviceState.screenHeightPx - controller.timerSizePx)
+                        y = min(y, serviceState.screenHeightPx - controller.buttonRadiusPx)
                         // this is the good code
                         overlayState.timerOffset = IntOffset(x, y)
 

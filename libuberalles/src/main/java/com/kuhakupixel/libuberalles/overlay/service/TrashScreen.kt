@@ -12,7 +12,11 @@ import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
 import com.kuhakupixel.libuberalles.overlay.composables.Trash
 
 @Composable
-fun TrashContentScreen(showOverlayButton: Boolean, serviceState: ServiceState) {
+fun TrashContentScreen(
+    showOverlayButton: Boolean,
+    serviceState: ServiceState,
+    buttonRadiusDp: Int
+) {
 
     Box(Modifier.onGloballyPositioned {
         serviceState.screenWidthPx = it.size.width
@@ -20,13 +24,13 @@ fun TrashContentScreen(showOverlayButton: Boolean, serviceState: ServiceState) {
     }) {
         // future.txt correct z-order
         if (showOverlayButton) {
-            ShowTrash(serviceState = serviceState)
+            ShowTrash(serviceState = serviceState, buttonRadiusDp = buttonRadiusDp)
         }
     }
 }
 
 @Composable
-fun ShowTrash(serviceState: ServiceState) {
+fun ShowTrash(serviceState: ServiceState, buttonRadiusDp: Int) {
     val overlayState = serviceState.overlayButtonState
     if (overlayState.showTrash) {
         Column(
@@ -34,7 +38,7 @@ fun ShowTrash(serviceState: ServiceState) {
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Trash(overlayState)
+            Trash(overlayState, buttonRadiusDp = buttonRadiusDp)
         }
     }
 }

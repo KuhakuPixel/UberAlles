@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
 import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
-import com.kuhakupixel.libuberalles.overlay.OVERLAY_BUTTON_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.overlay.logd
+import com.kuhakupixel.libuberalles.overlay.px
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
@@ -23,14 +23,12 @@ class OverlayButtonController(
     val windowManager: WindowManager,
     val service: UberAllesWindow,
     val onClick: () -> Unit,
+    val buttonRadiusDp: Int,
     val content: @Composable () -> Unit,
-) :
-    OverlayInterface {
+) : OverlayInterface {
 
     private val overlayButtonState = service.state.overlayButtonState
-
-    private val density = service.resources.displayMetrics.density
-    val timerSizePx = (OVERLAY_BUTTON_SIZE_DP * density).toInt()
+    val buttonRadiusPx = buttonRadiusDp.px
     private val trashScreenViewController = OverlayViewController(
         createOverlayViewHolder = this::createTrashScreenOverlay,
         windowManager = windowManager,
@@ -74,7 +72,8 @@ class OverlayButtonController(
             CompositionLocalProvider(LocalServiceState provides service.state) {
                 TrashContentScreen(
                     showOverlayButton = overlayButtonState.isVisible.value,
-                    service.state,
+                    serviceState = service.state,
+                    buttonRadiusDp = buttonRadiusDp,
                 )
             }
         }
@@ -87,8 +86,8 @@ class OverlayButtonController(
         val overlayButtonClickTarget = OverlayViewHolder(
             windowManager = windowManager,
             params = WindowManager.LayoutParams(
-                timerSizePx,
-                timerSizePx,
+                buttonRadiusPx,
+                buttonRadiusPx,
                 0,
                 0,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,

@@ -24,75 +24,77 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.kuhakupixel.libuberalles.overlay.OVERLAY_BUTTON_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.TRASH_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayState
 
 @Composable
-fun Trash(overlayState: OverlayState) {
-  val context = LocalContext.current
-  val overlayButtonSizePx = remember {
-    val density = context.resources.displayMetrics.density
-    OVERLAY_BUTTON_SIZE_DP * density
-  }
-  var trashRect by remember { mutableStateOf(Rect.Zero) }
-  val isTimerDragHoveringTrash = remember {
-    derivedStateOf {
-      calcTimerIsHoverTrash(overlayState, overlayButtonSizePx, trashRect)
+fun Trash(
+    overlayState: OverlayState,
+    buttonRadiusDp: Int,
+) {
+    val context = LocalContext.current
+    val overlayButtonSizePx = remember {
+        val density = context.resources.displayMetrics.density
+        buttonRadiusDp * density
     }
-  }
-  val iconTint by remember {
-    derivedStateOf {
-      if (isTimerDragHoveringTrash.value) {
-        Color.Red
-      } else {
-        Color.Black
-      }
+    var trashRect by remember { mutableStateOf(Rect.Zero) }
+    val isTimerDragHoveringTrash = remember {
+        derivedStateOf {
+            calcTimerIsHoverTrash(overlayState, overlayButtonSizePx, trashRect)
+        }
     }
-  }
+    val iconTint by remember {
+        derivedStateOf {
+            if (isTimerDragHoveringTrash.value) {
+                Color.Red
+            } else {
+                Color.Black
+            }
+        }
+    }
 
-  Box(
-    Modifier
-      .size(TRASH_SIZE_DP.dp)
-      .clip(CircleShape)
-      .background(Color.White.copy(alpha = .5f))
-      .onGloballyPositioned {
-        trashRect = it.boundsInRoot()
-        logd("trashRect, $trashRect")
-      },
-    contentAlignment = Alignment.Center
-  ) {
-    Icon(
-      Icons.Filled.Delete, "trash", modifier = Modifier
-        .size(50.dp), tint = iconTint
-    )
-  }
+    Box(
+        Modifier
+            .size(TRASH_SIZE_DP.dp)
+            .clip(CircleShape)
+            .background(Color.White.copy(alpha = .5f))
+            .onGloballyPositioned {
+                trashRect = it.boundsInRoot()
+                logd("trashRect, $trashRect")
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(
+            Icons.Filled.Delete, "trash", modifier = Modifier
+                .size(50.dp), tint = iconTint
+        )
+    }
 
 // this is wack, but if it works...
-  LaunchedEffect(isTimerDragHoveringTrash) {
-    snapshotFlow {
-      isTimerDragHoveringTrash.value
-    }.collect {
-      overlayState.isTimerHoverTrash = it
+    LaunchedEffect(isTimerDragHoveringTrash) {
+        snapshotFlow {
+            isTimerDragHoveringTrash.value
+        }.collect {
+            overlayState.isTimerHoverTrash = it
+        }
     }
-  }
 }
 
 fun calcTimerIsHoverTrash(
-  overlayState: OverlayState,
-  timerSizePx: Float,
-  trashRect: Rect
+    overlayState: OverlayState,
+    timerSizePx: Float,
+    trashRect: Rect
 ): Boolean {
-  val timerCenterX = overlayState.timerOffset.x + (timerSizePx / 2)
-  val timerCenterY = overlayState.timerOffset.y + (timerSizePx / 2)
-  if (
-    timerCenterX < trashRect.left ||
-    timerCenterX > trashRect.right ||
-    timerCenterY < trashRect.top ||
-    timerCenterY > trashRect.bottom
-  ) {
-    return false
-  }
-  return true
+    val timerCenterX = overlayState.timerOffset.x + (timerSizePx / 2)
+    val timerCenterY = overlayState.timerOffset.y + (timerSizePx / 2)
+    if (
+        timerCenterX < trashRect.left ||
+        timerCenterX > trashRect.right ||
+        timerCenterY < trashRect.top ||
+        timerCenterY > trashRect.bottom
+    ) {
+        return false
+    }
+    return true
 }
