@@ -1,6 +1,4 @@
 package com.kuhakupixel.libuberalles.ui.overlay.service
-
-import com.kuhakupixel.libuberalles.overlay.OVERLAY_BUTTON_DEFAULT_SIZE_DP
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,56 +8,31 @@ import android.os.Build
 import android.os.IBinder
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
-import androidx.compose.material3.Text
 import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
-import com.kuhakupixel.libuberalles.overlay.TRASH_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.logd
-import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 
 open class UberAllesWindow : Service() {
     val state = ServiceState()
-
-    private lateinit var overlayButtonController: OverlayButtonController
-    private val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
+    open val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
 
 
-    fun onOverlayButtonClick() {
-        logd("Overlay Button Is Clicked")
-        // close the overlay button and open hacking menu
-        overlayButtonController.disableView()
-    }
-
-    var enableOverlayButton = true
     override fun onCreate() {
         super.onCreate()
-        overlayButtonController =
-            OverlayButtonController(
-                windowManager = windowManager,
-                service = this,
-                onClick = {
-                    // make sure to not allow double click
-                    // to avoid crash
-                    if (enableOverlayButton) {
-                        onOverlayButtonClick()
-                        enableOverlayButton = false
-                    }
-                },
-                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
-                trashSizeDp = TRASH_SIZE_DP
-            ) {
-                Text("Button")
-            }
     }
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
+    open fun onWindowShown() {
+
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         logd("FloatingService onStartCommand")
         startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
-        overlayButtonController.enableView()
+        onWindowShown()
         return START_STICKY
     }
 

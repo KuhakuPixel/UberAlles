@@ -17,7 +17,7 @@
         android:theme="@style/Theme.UberAlles"
         tools:targetApi="31">
         <service
-            android:name=".MyCustomService"
+            android:name=".MyFloatingButton"
             android:label="My Service"></service>
         <activity
             android:name=".MainActivity"
