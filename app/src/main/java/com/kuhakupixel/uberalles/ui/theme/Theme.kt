@@ -54,6 +54,9 @@ fun UberAllesTheme(
         else -> LightColorScheme
     }
     val view = LocalView.current
+    // need to disable this, because we can't cast Service
+    // into Activity
+    /*
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
@@ -61,6 +64,8 @@ fun UberAllesTheme(
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
+
+     */
 
     MaterialTheme(
         colorScheme = colorScheme,

@@ -37,6 +37,7 @@ fun TrashContentScreen(
 @Composable
 fun ShowTrash(serviceState: ServiceState, buttonRadiusDp: Int, trashSizeDp: Int) {
     val overlayState = serviceState.overlayButtonState
+
     if (overlayState.showTrash) {
         Column(
             Modifier.fillMaxSize(),

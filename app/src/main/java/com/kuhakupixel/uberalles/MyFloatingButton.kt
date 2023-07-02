@@ -10,12 +10,12 @@ class MyFloatingButton : UberAllesWindow() {
     val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
     private lateinit var overlayButtonController: OverlayButtonController
+    private lateinit var overlayScreenController: MyOverlayScreenController
     fun onOverlayButtonClick() {
         // close the overlay button and open hacking menu
         overlayButtonController.disableView()
     }
 
-    var enableOverlayButton = true
     override fun onCreate() {
         super.onCreate()
         overlayButtonController =
@@ -23,18 +23,24 @@ class MyFloatingButton : UberAllesWindow() {
                 windowManager = windowManager,
                 service = this,
                 onClick = {
-                    // make sure to not allow double click
-                    // to avoid crash
-                    if (enableOverlayButton) {
-                        onOverlayButtonClick()
-                        enableOverlayButton = false
-                    }
+                    onOverlayButtonClick()
+                    overlayButtonController.disableView()
+                    overlayScreenController.enableView()
                 },
                 buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
                 trashSizeDp = TRASH_SIZE_DP
             ) {
                 Text("Button")
             }
+        overlayScreenController =
+            MyOverlayScreenController(
+
+                service = this, windowManager = windowManager,
+                onClosed = {
+                    overlayScreenController.disableView()
+                    overlayButtonController.enableView()
+                },
+            )
     }
 
     override fun onWindowShown() {
