@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.material3.Text
 import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
+import com.kuhakupixel.libuberalles.overlay.TRASH_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 
@@ -44,7 +45,8 @@ open class UberAllesWindow : Service() {
                         enableOverlayButton = false
                     }
                 },
-                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP
+                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
+                trashSizeDp = TRASH_SIZE_DP
             ) {
                 Text("Button")
             }

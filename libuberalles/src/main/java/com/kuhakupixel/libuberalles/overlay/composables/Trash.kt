@@ -24,7 +24,6 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.kuhakupixel.libuberalles.overlay.TRASH_SIZE_DP
 import com.kuhakupixel.libuberalles.overlay.logd
 import com.kuhakupixel.libuberalles.overlay.service.OverlayState
 
@@ -32,6 +31,7 @@ import com.kuhakupixel.libuberalles.overlay.service.OverlayState
 fun Trash(
     overlayState: OverlayState,
     buttonRadiusDp: Int,
+    trashSizeDp: Int,
 ) {
     val context = LocalContext.current
     val overlayButtonSizePx = remember {
@@ -56,7 +56,7 @@ fun Trash(
 
     Box(
         Modifier
-            .size(TRASH_SIZE_DP.dp)
+            .size(trashSizeDp.dp)
             .clip(CircleShape)
             .background(Color.White.copy(alpha = .5f))
             .onGloballyPositioned {

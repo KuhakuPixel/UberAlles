@@ -24,6 +24,7 @@ class OverlayButtonController(
     val service: UberAllesWindow,
     val onClick: () -> Unit,
     val buttonRadiusDp: Int,
+    val trashSizeDp: Int,
     val content: @Composable () -> Unit,
 ) : OverlayInterface {
 
@@ -74,6 +75,7 @@ class OverlayButtonController(
                     showOverlayButton = overlayButtonState.isVisible.value,
                     serviceState = service.state,
                     buttonRadiusDp = buttonRadiusDp,
+                    trashSizeDp = trashSizeDp,
                 )
             }
         }
