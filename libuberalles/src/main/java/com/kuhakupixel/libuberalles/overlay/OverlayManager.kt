@@ -14,10 +14,16 @@ class OverlayManager(
     companion object {
         private var windowManager: WindowManager? = null
         private var service: UberAllesWindow? = null
+        private var applyTheme: (@Composable (content: @Composable () -> Unit) -> Unit)? = null
 
-        public fun init(windowManager: WindowManager, service: UberAllesWindow) {
+        public fun init(
+            windowManager: WindowManager,
+            service: UberAllesWindow,
+            applyTheme: @Composable (content: @Composable () -> Unit) -> Unit
+        ) {
             OverlayManager.windowManager = windowManager
             OverlayManager.service = service
+            OverlayManager.applyTheme = applyTheme
         }
 
         private fun createDialogOverlay(
@@ -40,7 +46,10 @@ class OverlayManager(
             )
 
             dialogViewHolder.setContent {
-                content()
+                applyTheme!!{
+                    content()
+                }
+
             }
 
             return dialogViewHolder
