@@ -80,9 +80,7 @@ open class OverlayDialog(
     ) -> OverlayViewHolder,
     private val windowManager: WindowManager,
 ) {
-    private val title: MutableState<String> = mutableStateOf("")
-    private var onConfirm: () -> Unit = {}
-    private var onClose: () -> Unit = {}
+    private var body: (@Composable () -> Unit)? = null
     private var overlayViewController: OverlayViewController? = null
 
     init {
@@ -91,33 +89,8 @@ open class OverlayDialog(
     }
 
     fun InitDialogBody(body: @Composable () -> Unit) {
-        if (overlayViewController != null) {
-            throw IllegalStateException("view Controller have been initialized, but initialized again")
-        }
+        this.body = body
 
-        overlayViewController =
-            OverlayViewController(
-                createOverlayViewHolder = fun(): OverlayViewHolder {
-                    return createDialogOverlay {
-                        DrawOverlayDialog(
-                            title = title.value,
-                            body =
-                            { modifier: Modifier ->
-                                Box(modifier = modifier) {
-                                    body()
-                                }
-                            },
-                            onConfirm = onConfirm,
-                            onClose = {
-                                onClose()
-                                overlayViewController!!.disableView()
-                            },
-                        )
-                    }
-                },
-                windowManager = windowManager,
-                enableDisableMode = OverlayEnableDisableMode.CREATE_AND_DESTROY,
-            )
     }
 
 
@@ -126,10 +99,30 @@ open class OverlayDialog(
      * */
 
     open fun show(title: String, onConfirm: () -> Unit, onClose: () -> Unit = {}) {
-        this.title.value = title
-        this.onConfirm = onConfirm
-        this.onClose = onClose
-        this.overlayViewController!!.enableView()
+        this.overlayViewController =
+            OverlayViewController(
+                createOverlayViewHolder = fun(): OverlayViewHolder {
+                    return createDialogOverlay {
+                        DrawOverlayDialog(
+                            title = title,
+                            body =
+                            { modifier: Modifier ->
+                                Box(modifier = modifier) {
+                                    body!!()
+                                }
+                            },
+                            onConfirm = onConfirm,
+                            onClose = {
+                                onClose()
+                                this.overlayViewController!!.disableView()
+                            },
+                        )
+                    }
+                },
+                windowManager = windowManager,
+                enableDisableMode = OverlayEnableDisableMode.CREATE_AND_DESTROY,
+            )
+        overlayViewController!!.enableView()
     }
 
 }
