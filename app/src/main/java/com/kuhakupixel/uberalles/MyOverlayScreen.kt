@@ -11,6 +11,7 @@ import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
 import android.graphics.PixelFormat
+import android.util.Log
 import android.view.WindowManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,38 @@ fun MyMainScreen() {
             }
         ) {
             Text("Show Info Dialog")
+        }
+
+        Button(
+            onClick = fun() {
+                OverlayManager.getInputDialog()
+                    .show(
+                        "Title Of the Dialog",
+                        onConfirm = { input: String ->
+                            Log.d("UberAlles", "input is $input")
+                        }
+                    )
+            }
+        ) {
+            Text("Show Input Dialog")
+        }
+
+        Button(
+            onClick = fun() {
+                OverlayManager.getChoicesDialog()
+                    .show(
+                        title = "Input Choices",
+                        choices = listOf("Hello", "World", "Third Choice"),
+                        chosenIndex = 0,
+                        onConfirm = { index, input ->
+                            Log.d("UberAlles", "input is $input, index is $index")
+                        },
+                        onClose = {}
+                    )
+
+            }
+        ) {
+            Text("Show Choices Dialog")
         }
 
     }
