@@ -28,7 +28,7 @@ class OverlayManager(
                 0,
                 PixelFormat.TRANSLUCENT
             ),
-            alpha = 0.9f,
+            alpha = 1f,
             service = service,
         )
 

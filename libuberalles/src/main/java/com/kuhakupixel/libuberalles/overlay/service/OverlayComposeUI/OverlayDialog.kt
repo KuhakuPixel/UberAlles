@@ -1,6 +1,7 @@
 package com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI
 
 import android.view.WindowManager
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +34,8 @@ private fun DrawOverlayDialog(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(10.dp)
+            .background(color = Color.White),
         verticalArrangement = Arrangement.spacedBy(10.dp)
 
     ) {

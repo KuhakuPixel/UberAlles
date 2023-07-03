@@ -14,7 +14,9 @@ import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayDial
 class OverlayInfoDialog(
     createDialogOverlay: (
         content: @Composable () -> Unit,
-    ) -> OverlayViewHolder, windowManager: WindowManager
+    ) -> OverlayViewHolder,
+
+    windowManager: WindowManager
 ) : OverlayDialog(
     createDialogOverlay = createDialogOverlay, windowManager = windowManager,
 ) {
