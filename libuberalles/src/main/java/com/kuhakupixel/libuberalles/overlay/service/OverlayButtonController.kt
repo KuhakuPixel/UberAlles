@@ -66,10 +66,7 @@ class OverlayButtonController(
             alpha = alpha,
 
             service = service,
-        )
-
-
-        fullscreenOverlay.setContent {
+        ) {
             CompositionLocalProvider(LocalServiceState provides service.state) {
                 TrashContentScreen(
                     showOverlayButton = overlayButtonState.isVisible.value,
@@ -99,7 +96,6 @@ class OverlayButtonController(
             alpha = 0.9f, service = service,
         )
         overlayButtonClickTarget.setContent {
-
             val showClickTarget = remember { mutableStateOf(true) }
             if (showClickTarget.value) {
                 ClickTarget(

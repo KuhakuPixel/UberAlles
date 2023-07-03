@@ -13,6 +13,7 @@ class OverlayViewHolder(
     private val params: WindowManager.LayoutParams,
     val alpha: Float,
     val service: UberAllesWindow,
+    val content: @Composable (composeView: ComposeView) -> Unit = {},
 ) {
 
     private var view: ComposeView? = null
@@ -26,6 +27,8 @@ class OverlayViewHolder(
         // save original params
         originalWindowFlag = params.flags
         originalWindowAlpha = params.alpha
+        //
+        this.view = overlayViewFactory(service = service, content = content)
     }
 
     fun getParams(): WindowManager.LayoutParams {
@@ -60,6 +63,6 @@ class OverlayViewHolder(
 
     fun setContent(content: @Composable (composeView: ComposeView) -> Unit = {}) {
         this.view = overlayViewFactory(service = service, content = content)
-
     }
+
 }

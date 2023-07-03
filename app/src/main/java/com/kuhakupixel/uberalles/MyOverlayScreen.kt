@@ -119,9 +119,7 @@ class MyOverlayScreenController(
             ),
             alpha = 0.9f,
             service = service,
-        )
-
-        hackingScreen.setContent {
+        ) {
             UberAllesTheme(darkTheme = true) {
                 // A surface container using the 'background' color from the theme
                 Surface(

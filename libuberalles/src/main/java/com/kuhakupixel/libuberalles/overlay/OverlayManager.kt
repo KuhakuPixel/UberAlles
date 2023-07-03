@@ -12,7 +12,7 @@ open class OverlayManager(
 ) {
 
     companion object {
-        private var windowManager: WindowManager? = null
+        var windowManager: WindowManager? = null
         private var service: UberAllesWindow? = null
         private var applyTheme: (@Composable (content: @Composable () -> Unit) -> Unit)? = null
 
@@ -43,9 +43,7 @@ open class OverlayManager(
                 ),
                 alpha = 1f,
                 service = service!!,
-            )
-
-            dialogViewHolder.setContent {
+            ) {
                 applyTheme!!{
                     content()
                 }
