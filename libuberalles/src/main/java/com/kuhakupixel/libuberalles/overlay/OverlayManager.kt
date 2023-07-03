@@ -8,7 +8,7 @@ import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayChoicesDialog
 import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayInfoDialog
 import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayInputDialog
 
-class OverlayManager(
+open class OverlayManager(
 ) {
 
     companion object {
@@ -16,7 +16,7 @@ class OverlayManager(
         private var service: UberAllesWindow? = null
         private var applyTheme: (@Composable (content: @Composable () -> Unit) -> Unit)? = null
 
-        public fun init(
+        fun init(
             windowManager: WindowManager,
             service: UberAllesWindow,
             applyTheme: @Composable (content: @Composable () -> Unit) -> Unit
@@ -26,7 +26,7 @@ class OverlayManager(
             OverlayManager.applyTheme = applyTheme
         }
 
-        private fun createDialogOverlay(
+        fun createDialogOverlay(
             content: @Composable () -> Unit,
         ): OverlayViewHolder {
 

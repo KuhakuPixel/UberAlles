@@ -76,6 +76,21 @@ fun MyMainScreen() {
             Text("Show Choices Dialog")
         }
 
+        Button(
+            onClick = fun() {
+                MyOverlayManager.getMyCustomDialog()
+                    .show(
+                        title = "Custom Dialog",
+                        onConfirm = { input, isChecked ->
+                            Log.d("UberAlles", "Input is $input, isChecked $isChecked")
+                        }
+                    )
+
+            }
+        ) {
+            Text("Custom Dialog")
+        }
+
     }
 }
 
