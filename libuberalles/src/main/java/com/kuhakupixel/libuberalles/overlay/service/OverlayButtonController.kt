@@ -96,23 +96,19 @@ class OverlayButtonController(
             alpha = 0.9f, service = service,
         )
         overlayButtonClickTarget.setContent {
-            val showClickTarget = remember { mutableStateOf(true) }
-            if (showClickTarget.value) {
-                ClickTarget(
-                    serviceState = service.state,
-                    controller = this,
-                    overlayState = overlayButtonState,
-                    viewHolder = overlayButtonClickTarget,
-                    onDropOnTrash = {
-                        exitOverlayButton()
-                        showClickTarget.value = false
-                    },
-                    onClick = {
-                        onClick()
-                    },
-                    buttonContent = content,
-                )
-            }
+            ClickTarget(
+                serviceState = service.state,
+                controller = this,
+                overlayState = overlayButtonState,
+                viewHolder = overlayButtonClickTarget,
+                onDropOnTrash = {
+                    exitOverlayButton()
+                },
+                onClick = {
+                    onClick()
+                },
+                buttonContent = content,
+            )
         }
         return overlayButtonClickTarget
     }
