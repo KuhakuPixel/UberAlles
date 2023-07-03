@@ -80,7 +80,6 @@ open class OverlayDialog(
     ) -> OverlayViewHolder,
     private val windowManager: WindowManager,
 ) {
-    private var body: (@Composable () -> Unit)? = null
     private var overlayViewController: OverlayViewController? = null
 
     init {
@@ -88,9 +87,8 @@ open class OverlayDialog(
 
     }
 
-    fun InitDialogBody(body: @Composable () -> Unit) {
-        this.body = body
-
+    @Composable
+    open fun DialogBody() {
     }
 
 
@@ -108,7 +106,7 @@ open class OverlayDialog(
                             body =
                             { modifier: Modifier ->
                                 Box(modifier = modifier) {
-                                    body!!()
+                                    DialogBody()
                                 }
                             },
                             onConfirm = onConfirm,

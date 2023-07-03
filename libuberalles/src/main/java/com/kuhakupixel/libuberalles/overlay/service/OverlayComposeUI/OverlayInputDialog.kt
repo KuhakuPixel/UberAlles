@@ -50,17 +50,16 @@ class OverlayInputDialog(
 ) {
     private val valueInput: MutableState<String> = mutableStateOf("")
 
-    init {
-        InitDialogBody {
-            NumberInputField(
-                value = valueInput.value,
-                onValueChange = { value ->
-                    valueInput.value = value
-                },
-                label = "Value Input ...",
-                placeholder = "value ...",
-            )
-        }
+    @Composable
+    override fun DialogBody() {
+        NumberInputField(
+            value = valueInput.value,
+            onValueChange = { value ->
+                valueInput.value = value
+            },
+            label = "Value Input ...",
+            placeholder = "value ...",
+        )
     }
 
     fun show(title: String, onConfirm: (input: String) -> Unit) {

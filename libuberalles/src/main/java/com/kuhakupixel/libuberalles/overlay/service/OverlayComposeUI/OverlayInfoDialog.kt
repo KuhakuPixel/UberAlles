@@ -22,12 +22,11 @@ class OverlayInfoDialog(
 ) {
     private val dialogText: MutableState<String> = mutableStateOf("")
 
-    init {
-        InitDialogBody {
-            Text(
-                dialogText.value, modifier = Modifier.verticalScroll(rememberScrollState())
-            )
-        }
+    @Composable
+    override fun DialogBody() {
+        Text(
+            dialogText.value, modifier = Modifier.verticalScroll(rememberScrollState())
+        )
     }
 
     fun show(title: String, text: String, onConfirm: () -> Unit) {

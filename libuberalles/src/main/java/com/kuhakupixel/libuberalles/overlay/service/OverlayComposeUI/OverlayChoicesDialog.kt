@@ -22,24 +22,23 @@ class OverlayChoicesDialog(
     private val choices: MutableState<List<String>> = mutableStateOf(listOf())
     private val chosenIndex: MutableState<Int> = mutableStateOf(0)
 
-    init {
-        InitDialogBody {
-            Column(Modifier.fillMaxSize()) {
-                for (i in 0 until choices.value.size) {
-                    Row {
-                        Text(choices.value[i], modifier = Modifier.weight(0.8f))
-                        Checkbox(
-                            modifier = Modifier.weight(0.2f),
-                            // only checked if its chosen
-                            checked = chosenIndex.value == i,
-                            onCheckedChange = { checked: Boolean ->
-                                // set chosen index if its checked
-                                if (checked)
-                                    chosenIndex.value = i
-                            },
-                        )
+    @Composable
+    override fun DialogBody() {
+        Column(Modifier.fillMaxSize()) {
+            for (i in 0 until choices.value.size) {
+                Row {
+                    Text(choices.value[i], modifier = Modifier.weight(0.8f))
+                    Checkbox(
+                        modifier = Modifier.weight(0.2f),
+                        // only checked if its chosen
+                        checked = chosenIndex.value == i,
+                        onCheckedChange = { checked: Boolean ->
+                            // set chosen index if its checked
+                            if (checked)
+                                chosenIndex.value = i
+                        },
+                    )
 
-                    }
                 }
             }
         }
