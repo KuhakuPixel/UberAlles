@@ -1,4 +1,4 @@
-package com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI
+package com.kuhakupixel.libuberalles.overlay.service.dialog
 
 import android.view.WindowManager
 import androidx.compose.foundation.rememberScrollState
@@ -9,7 +9,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
-import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayDialog
 
 class OverlayInfoDialog(
     createDialogOverlay: (

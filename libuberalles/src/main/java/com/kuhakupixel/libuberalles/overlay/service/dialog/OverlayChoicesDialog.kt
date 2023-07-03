@@ -1,4 +1,4 @@
-package com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI
+package com.kuhakupixel.libuberalles.overlay.service.dialog
 
 import android.view.WindowManager
 import androidx.compose.foundation.layout.Column

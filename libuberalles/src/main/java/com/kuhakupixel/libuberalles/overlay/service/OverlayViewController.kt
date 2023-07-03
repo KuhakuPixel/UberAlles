@@ -1,6 +1,5 @@
 package com.kuhakupixel.libuberalles.ui.overlay.service
 
-import android.util.Log
 import android.view.WindowManager
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.overlay.logd
