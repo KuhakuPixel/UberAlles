@@ -4,6 +4,9 @@
 is an experimental library for creating on top of everything view
 in android with jetpack compose
 
+## Credit
+original code is from https://github.com/tberghuis/FloatingCountdownTimer
+which is then heavily refactored to be used as a library
 
 ## Useful Reference
 
