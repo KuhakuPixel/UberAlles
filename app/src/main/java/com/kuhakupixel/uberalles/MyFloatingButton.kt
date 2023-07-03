@@ -1,6 +1,7 @@
 package com.kuhakupixel.uberalles
 
 import androidx.compose.material3.Text
+import com.kuhakupixel.libuberalles.overlay.OverlayManager
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 
@@ -18,6 +19,9 @@ class MyFloatingButton : UberAllesWindow() {
 
     override fun onCreate() {
         super.onCreate()
+        // Initialize Overlay Manager for drawing dialog and etc
+        OverlayManager.init(windowManager = this.windowManager, service = this)
+        //
         overlayButtonController =
             OverlayButtonController(
                 windowManager = windowManager,

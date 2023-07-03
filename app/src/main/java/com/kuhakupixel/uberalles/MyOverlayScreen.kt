@@ -34,6 +34,15 @@ fun MyMainScreen() {
             Text("Click me to incremeant")
         }
 
+        Button(
+            onClick = fun() {
+                OverlayManager.getInfoDialog()
+                    .show("Title Of the Dialog", "Body of the dialog", onConfirm = {})
+            }
+        ) {
+            Text("Show Info Dialog")
+        }
+
     }
 }
 
@@ -65,7 +74,6 @@ class MyOverlayScreenController(
         )
 
         hackingScreen.setContent {
-            val overlayManager = OverlayManager(windowManager, service)
             UberAllesTheme(darkTheme = true) {
                 // A surface container using the 'background' color from the theme
                 Surface(

@@ -62,12 +62,11 @@ fun MainMenu(askForOverlayPermission: () -> Unit) {
                 }
                 //
                 startOverlayButton(context)
-            },
-
-
-            ) {
+            }
+        ) {
             Text("Show Overlay Button")
         }
+
     }
     if (showAskForDrawOverOtherApp.value) {
         AlertDialog(

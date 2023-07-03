@@ -9,57 +9,65 @@ import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayInfo
 import com.kuhakupixel.libuberalles.overlay.service.OverlayComposeUI.OverlayInputDialog
 
 class OverlayManager(
-    private val windowManager: WindowManager,
-    private val service: UberAllesWindow
 ) {
 
-    private fun createDialogOverlay(
-        content: @Composable () -> Unit,
-    ): OverlayViewHolder {
+    companion object {
+        private var windowManager: WindowManager? = null
+        private var service: UberAllesWindow? = null
 
-        val dialogViewHolder = OverlayViewHolder(
-            windowManager = windowManager,
-            params = WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                0,
-                0,
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                0,
-                PixelFormat.TRANSLUCENT
-            ),
-            alpha = 1f,
-            service = service,
-        )
-
-        dialogViewHolder.setContent {
-            content()
+        public fun init(windowManager: WindowManager, service: UberAllesWindow) {
+            OverlayManager.windowManager = windowManager
+            OverlayManager.service = service
         }
 
-        return dialogViewHolder
-    }
+        private fun createDialogOverlay(
+            content: @Composable () -> Unit,
+        ): OverlayViewHolder {
 
-    init {
-    }
+            val dialogViewHolder = OverlayViewHolder(
+                windowManager = windowManager!!,
+                params = WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    0,
+                    0,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    0,
+                    PixelFormat.TRANSLUCENT
+                ),
+                alpha = 1f,
+                service = service!!,
+            )
 
-    fun getInfoDialog(): OverlayInfoDialog {
-        return OverlayInfoDialog(
-            createDialogOverlay = ::createDialogOverlay,
-            windowManager = windowManager
-        )
-    }
+            dialogViewHolder.setContent {
+                content()
+            }
 
-    fun getInputDialog(): OverlayInputDialog {
-        return OverlayInputDialog(
-            createDialogOverlay = ::createDialogOverlay,
-            windowManager = windowManager
-        )
-    }
+            return dialogViewHolder
+        }
 
-    fun getChoicesDialog(): OverlayChoicesDialog {
-        return OverlayChoicesDialog(
-            createDialogOverlay = ::createDialogOverlay,
-            windowManager = windowManager
-        )
+        init {
+        }
+
+        fun getInfoDialog(): OverlayInfoDialog {
+            return OverlayInfoDialog(
+                createDialogOverlay = ::createDialogOverlay,
+                windowManager = windowManager!!
+            )
+        }
+
+        fun getInputDialog(): OverlayInputDialog {
+            return OverlayInputDialog(
+                createDialogOverlay = ::createDialogOverlay,
+                windowManager = windowManager!!
+            )
+        }
+
+        fun getChoicesDialog(): OverlayChoicesDialog {
+            return OverlayChoicesDialog(
+                createDialogOverlay = ::createDialogOverlay,
+                windowManager = windowManager!!
+            )
+        }
     }
 }
