@@ -32,15 +32,6 @@ open class OverlayManager(
 
             val dialogViewHolder = OverlayViewHolder(
                 windowManager = windowManager!!,
-                params = WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    0,
-                    0,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    0,
-                    PixelFormat.TRANSLUCENT
-                ),
                 alpha = 1f,
                 service = service!!,
             ) {

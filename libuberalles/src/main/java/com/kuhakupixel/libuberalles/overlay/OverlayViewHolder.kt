@@ -1,18 +1,26 @@
 package com.kuhakupixel.libuberalles.overlay
 
+import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.libuberalles.overlay.service.overlayViewFactory
-
 class OverlayViewHolder(
 
     val windowManager: WindowManager,
-    private val params: WindowManager.LayoutParams,
     val alpha: Float,
     val service: UberAllesWindow,
+    private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.MATCH_PARENT,
+        0,
+        0,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        0,
+        PixelFormat.TRANSLUCENT
+    ),
     val content: @Composable (composeView: ComposeView) -> Unit = {},
 ) {
 
