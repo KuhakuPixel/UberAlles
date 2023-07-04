@@ -69,7 +69,7 @@ private fun DrawOverlayDialog(
  * this can be subclassed to create an even more complex dialog
  * for example, input dialog, multiple choice dialog and etc
  * which have a title, a cancel, confirm button
- * and content which can be set by [InitDialogBody] by subclasses
+ * and content which can be set by overriding [DialogBody]
  * */
 open class OverlayDialog(
     val overlayContext: OverlayContext
