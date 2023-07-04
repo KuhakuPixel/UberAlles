@@ -17,14 +17,9 @@ class MyOverlayDraggableButton : UberAllesWindow() {
 
     private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
     private lateinit var overlayScreenController: MyOverlayScreenController
-    fun onOverlayButtonClick() {
-        // close the overlay button and open hacking menu
-        overlayDraggableButtonController.disableView()
-    }
-
     override fun onCreate() {
         super.onCreate()
-        // Initialize Overlay Manager for drawing dialog and etc
+        // Initialize Overlay Context for drawing dialog and etc
         val overlayContext = OverlayContext(
             windowManager = this.windowManager, service = this,
             applyTheme = { content ->
@@ -44,7 +39,6 @@ class MyOverlayDraggableButton : UberAllesWindow() {
                 windowManager = windowManager,
                 service = this,
                 onClick = {
-                    onOverlayButtonClick()
                     overlayDraggableButtonController.disableView()
                     overlayScreenController.enableView()
                 },
