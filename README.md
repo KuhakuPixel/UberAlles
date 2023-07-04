@@ -176,4 +176,6 @@ https://stackoverflow.com/questions/40437721/how-to-give-screen-overlay-permissi
 https://stackoverflow.com/questions/52382710/permission-denial-startforeground-requires-android-permission-foreground-servic
 
 
-
+## License
+This project is licensed under `Mozilla Public License
+Version 2.0`. Please refer to [LICENSE](./LICENSE.md) for the full text.
