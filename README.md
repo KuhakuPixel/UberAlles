@@ -8,6 +8,7 @@ in android with jetpack compose
 ## Usage
 full example of usage [here](./app/)
 
+
 ### Add Permission
 
 add code below to `AndroidManifest.xml`
@@ -16,6 +17,73 @@ add code below to `AndroidManifest.xml`
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+```
+### Asking Overlay Permission
+drawing overlay requires user's permission, so call this in your `MainActivity` class
+(that subclass `ComponentActivity`)
+
+```kotlin
+if (!Settings.canDrawOverlays(context)) {
+    OverlayPermission.askForOverlayPermission(
+        context = applicationContext,
+        componentActivity = this
+    )
+}
+
+```
+### Making Draggable Overlay Button
+```kotlin
+class MyOverlayDraggableButton : UberAllesWindow() {
+    val TRASH_SIZE_DP = 90
+    val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
+
+    private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
+
+    override fun onCreate() {
+        super.onCreate()
+        // Initialize OverlayContext for drawing dialog and etc
+        val overlayContext = OverlayContext(
+            windowManager = this.windowManager, service = this,
+            // applying theme to overlay view
+            applyTheme = { content ->
+                UberAllesTheme(darkTheme = true) {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background,
+                        content = content
+                    )
+                }
+            },
+        )
+        //
+        overlayDraggableButtonController =
+            OverlayDraggableButtonController(
+                windowManager = windowManager,
+                service = this,
+                onClick = {
+                    overlayDraggableButtonController.disableView()
+                },
+                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
+                trashSizeDp = TRASH_SIZE_DP
+            ) {
+                Text("Button")
+            }
+    }
+
+    override fun onWindowShown() {
+        super.onWindowShown()
+        overlayDraggableButtonController.enableView()
+    }
+}
+```
+
+starting the button
+```kotlin 
+fun startOverlayButton(context: Context) {
+    val intent = Intent(context.applicationContext, MyOverlayDraggableButton::class.java)
+    context.startForegroundService(intent)
+}
 ```
 
 ## Credit
