@@ -1,5 +1,6 @@
 package com.kuhakupixel.uberalles
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -7,11 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableButtonController
-import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
+import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
 
-
-class MyOverlayDraggableButton : UberAllesWindow() {
+class MyOverlayServiceEntry : OverlayServiceEntry() {
     val TRASH_SIZE_DP = 90
     val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
@@ -23,6 +23,7 @@ class MyOverlayDraggableButton : UberAllesWindow() {
         val overlayContext = OverlayContext(
             windowManager = this.windowManager, service = this,
             applyTheme = { content ->
+                // applying theme to overlay view
                 UberAllesTheme(darkTheme = true) {
                     // A surface container using the 'background' color from the theme
                     Surface(
@@ -41,6 +42,10 @@ class MyOverlayDraggableButton : UberAllesWindow() {
                 onClick = {
                     overlayDraggableButtonController.disableView()
                     overlayScreenController.enableView()
+                },
+                onDestroyed = {
+                    Log.d("UberAlles", "Button Destroyed")
+                    this.stopSelf()
                 },
                 buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
                 trashSizeDp = TRASH_SIZE_DP

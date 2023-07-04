@@ -8,7 +8,7 @@ import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
-import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
+import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
 import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
@@ -19,8 +19,9 @@ val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceStat
 
 class OverlayDraggableButtonController(
     val windowManager: WindowManager,
-    val service: UberAllesWindow,
+    val service: OverlayServiceEntry,
     val onClick: () -> Unit,
+    val onDestroyed: () -> Unit,
     val buttonRadiusDp: Int,
     val trashSizeDp: Int,
     val content: @Composable () -> Unit,
@@ -100,7 +101,7 @@ class OverlayDraggableButtonController(
                 overlayState = overlayButtonState,
                 viewHolder = overlayButtonClickTarget,
                 onDropOnTrash = {
-                    exitOverlayButton()
+                    this.disableView()
                 },
                 onClick = {
                     onClick()
@@ -121,13 +122,9 @@ class OverlayDraggableButtonController(
     }
 
     override fun disableView() {
-        exitOverlayButton()
-    }
-
-    private fun exitOverlayButton() {
         trashScreenViewController.disableView()
         overlayButtonViewController.disableView()
         overlayButtonState.isVisible.value = false
-        service.stopSelf()
+        onDestroyed()
     }
 }

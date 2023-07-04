@@ -92,6 +92,6 @@ fun MainMenu(askForOverlayPermission: () -> Unit) {
 }
 
 fun startOverlayButton(context: Context) {
-    val intent = Intent(context.applicationContext, MyOverlayDraggableButton::class.java)
+    val intent = Intent(context.applicationContext, MyOverlayServiceEntry::class.java)
     context.startForegroundService(intent)
 }

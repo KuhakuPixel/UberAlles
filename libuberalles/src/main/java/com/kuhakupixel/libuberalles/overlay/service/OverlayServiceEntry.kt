@@ -12,7 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
 import com.kuhakupixel.libuberalles.overlay.logd
 
-open class UberAllesWindow : Service() {
+open class OverlayServiceEntry : Service() {
     val state = ServiceState()
     open val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
 

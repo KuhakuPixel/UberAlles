@@ -5,13 +5,13 @@ import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
-import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
+import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
 import com.kuhakupixel.libuberalles.overlay.service.overlayViewFactory
 class OverlayViewHolder(
 
     val windowManager: WindowManager,
     val alpha: Float,
-    val service: UberAllesWindow,
+    val service: OverlayServiceEntry,
     private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
