@@ -5,6 +5,27 @@ is an experimental library for creating on top of everything view
 in android with jetpack compose
 
 ## Download 
+
+- add `maven { url "https://jitpack.io" }` in `settings.gradle`
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+```
+add to your app's `build.gradle`
+```groovy
+dependencies {
+    def libUberAllesVersion = '0.0.2'
+    implementation "com.github.KuhakuPixel:UberAlles:${libUberAllesVersion}"
+}
+```
 ## Usage
 full example of usage [here](./app/)
 
