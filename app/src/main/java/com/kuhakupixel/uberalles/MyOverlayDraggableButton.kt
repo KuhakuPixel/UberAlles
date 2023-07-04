@@ -6,20 +6,20 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import com.kuhakupixel.libuberalles.overlay.OverlayContext
-import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
+import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableButtonController
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
 
 
-class MyFloatingButton : UberAllesWindow() {
+class MyOverlayDraggableButton : UberAllesWindow() {
     val TRASH_SIZE_DP = 90
     val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
-    private lateinit var overlayButtonController: OverlayButtonController
+    private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
     private lateinit var overlayScreenController: MyOverlayScreenController
     fun onOverlayButtonClick() {
         // close the overlay button and open hacking menu
-        overlayButtonController.disableView()
+        overlayDraggableButtonController.disableView()
     }
 
     override fun onCreate() {
@@ -39,13 +39,13 @@ class MyFloatingButton : UberAllesWindow() {
             },
         )
         //
-        overlayButtonController =
-            OverlayButtonController(
+        overlayDraggableButtonController =
+            OverlayDraggableButtonController(
                 windowManager = windowManager,
                 service = this,
                 onClick = {
                     onOverlayButtonClick()
-                    overlayButtonController.disableView()
+                    overlayDraggableButtonController.disableView()
                     overlayScreenController.enableView()
                 },
                 buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
@@ -58,13 +58,13 @@ class MyFloatingButton : UberAllesWindow() {
                 overlayContext = overlayContext,
                 onClosed = {
                     overlayScreenController.disableView()
-                    overlayButtonController.enableView()
+                    overlayDraggableButtonController.enableView()
                 },
             )
     }
 
     override fun onWindowShown() {
         super.onWindowShown()
-        overlayButtonController.enableView()
+        overlayDraggableButtonController.enableView()
     }
 }

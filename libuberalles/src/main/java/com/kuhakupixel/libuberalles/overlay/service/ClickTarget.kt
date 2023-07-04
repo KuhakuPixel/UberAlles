@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 @Composable
 fun ClickTarget(
     serviceState: ServiceState,
-    controller: OverlayButtonController,
+    controller: OverlayDraggableButtonController,
     overlayState: OverlayState,
     viewHolder: OverlayViewHolder,
     onDropOnTrash: () -> Unit,

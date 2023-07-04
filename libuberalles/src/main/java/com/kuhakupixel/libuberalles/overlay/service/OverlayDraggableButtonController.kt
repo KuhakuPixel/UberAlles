@@ -8,8 +8,6 @@ import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
 import com.kuhakupixel.libuberalles.ui.overlay.service.ServiceState
@@ -19,7 +17,7 @@ import com.kuhakupixel.libuberalles.overlay.px
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
-class OverlayButtonController(
+class OverlayDraggableButtonController(
     val windowManager: WindowManager,
     val service: UberAllesWindow,
     val onClick: () -> Unit,
