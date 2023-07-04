@@ -33,19 +33,29 @@ if (!Settings.canDrawOverlays(context)) {
 ```
 ### Making Draggable Overlay Button
 ```kotlin
-class MyOverlayDraggableButton : UberAllesWindow() {
+import android.util.Log
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
+import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableButtonController
+import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
+import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
+
+class MyOverlayServiceEntry : OverlayServiceEntry() {
     val TRASH_SIZE_DP = 90
     val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
     private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
-
     override fun onCreate() {
         super.onCreate()
-        // Initialize OverlayContext for drawing dialog and etc
+        // Initialize Overlay Context for drawing dialog and etc
         val overlayContext = OverlayContext(
             windowManager = this.windowManager, service = this,
-            // applying theme to overlay view
             applyTheme = { content ->
+                // applying theme to overlay view
                 UberAllesTheme(darkTheme = true) {
                     // A surface container using the 'background' color from the theme
                     Surface(
@@ -63,6 +73,10 @@ class MyOverlayDraggableButton : UberAllesWindow() {
                 service = this,
                 onClick = {
                     overlayDraggableButtonController.disableView()
+                },
+                onDestroyed = {
+                    Log.d("UberAlles", "Button Destroyed")
+                    this.stopSelf()
                 },
                 buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
                 trashSizeDp = TRASH_SIZE_DP
