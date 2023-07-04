@@ -95,10 +95,19 @@ class MyOverlayServiceEntry : OverlayServiceEntry() {
 starting the button
 ```kotlin 
 fun startOverlayButton(context: Context) {
-    val intent = Intent(context.applicationContext, MyOverlayDraggableButton::class.java)
+    val intent = Intent(context.applicationContext, MyOverlayServiceEntry::class.java)
     context.startForegroundService(intent)
 }
 ```
+
+### Add the class to your manifest
+add them inside `application` tag
+```xml
+<service
+    android:name=".MyOverlayServiceEntry"
+    android:label="My Service"></service>
+```
+
 
 ## Credit
 original code is from https://github.com/tberghuis/FloatingCountdownTimer
