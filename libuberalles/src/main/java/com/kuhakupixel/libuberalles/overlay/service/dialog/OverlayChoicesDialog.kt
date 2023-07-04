@@ -14,9 +14,9 @@ import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 
 class OverlayChoicesDialog(
-    overlayContext: OverlayContext
+    overlayContext: OverlayContext, alpha: Float = 1.0f
 ) : OverlayDialog(
-    overlayContext
+    overlayContext, alpha = alpha
 ) {
     private val choices: MutableState<List<String>> = mutableStateOf(listOf())
     private val chosenIndex: MutableState<Int> = mutableStateOf(0)

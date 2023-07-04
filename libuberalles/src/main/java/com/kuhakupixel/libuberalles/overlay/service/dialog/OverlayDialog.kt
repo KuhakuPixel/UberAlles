@@ -72,7 +72,7 @@ private fun DrawOverlayDialog(
  * and content which can be set by overriding [DialogBody]
  * */
 open class OverlayDialog(
-    val overlayContext: OverlayContext
+    val overlayContext: OverlayContext, val alpha: Float = 1.0f
 ) {
     private var overlayViewController: OverlayViewController? = null
 
@@ -82,7 +82,7 @@ open class OverlayDialog(
 
         val dialogViewHolder = OverlayViewHolder(
             windowManager = overlayContext.windowManager,
-            alpha = 1f,
+            alpha = alpha,
             service = overlayContext.service,
         ) {
             overlayContext.applyTheme?.invoke {

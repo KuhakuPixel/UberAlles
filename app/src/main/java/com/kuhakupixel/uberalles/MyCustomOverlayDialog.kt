@@ -12,9 +12,9 @@ import com.kuhakupixel.libuberalles.overlay.composables.NumberInputField
 import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayDialog
 
 class MyCustomOverlayDialog(
-    overlayContext: OverlayContext
+    overlayContext: OverlayContext, alpha: Float = 1.0f
 ) : OverlayDialog(
-    overlayContext
+    overlayContext, alpha = alpha
 ) {
     private val valueInput: MutableState<String> = mutableStateOf("")
     private val checked: MutableState<Boolean> = mutableStateOf(false)

@@ -46,6 +46,15 @@ fun MyMainScreen(overlayContext: OverlayContext) {
 
         Button(
             onClick = fun() {
+                OverlayInfoDialog(overlayContext, alpha = 0.90f)
+                    .show("Title Of the Dialog", "Body of the dialog", onConfirm = {})
+            }
+        ) {
+            Text("Show Transparent Info Dialog")
+        }
+
+        Button(
+            onClick = fun() {
                 OverlayInputDialog(overlayContext)
                     .show(
                         "Title Of the Dialog",

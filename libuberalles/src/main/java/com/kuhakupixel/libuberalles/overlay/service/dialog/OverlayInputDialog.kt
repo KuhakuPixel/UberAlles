@@ -16,9 +16,9 @@ import com.kuhakupixel.libuberalles.overlay.composables.NumberInputField
 
 
 class OverlayInputDialog(
-    overlayContext: OverlayContext
+    overlayContext: OverlayContext, alpha: Float = 1.0f
 ) : OverlayDialog(
-    overlayContext
+    overlayContext, alpha = alpha
 ) {
     private val valueInput: MutableState<String> = mutableStateOf("")
 
