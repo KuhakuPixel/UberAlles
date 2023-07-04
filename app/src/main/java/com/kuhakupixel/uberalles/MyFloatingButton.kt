@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import com.kuhakupixel.libuberalles.overlay.OverlayManager
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.service.OverlayButtonController
 import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
@@ -25,7 +25,7 @@ class MyFloatingButton : UberAllesWindow() {
     override fun onCreate() {
         super.onCreate()
         // Initialize Overlay Manager for drawing dialog and etc
-        OverlayManager.init(
+        val overlayContext = OverlayContext(
             windowManager = this.windowManager, service = this,
             applyTheme = { content ->
                 UberAllesTheme(darkTheme = true) {
@@ -55,8 +55,7 @@ class MyFloatingButton : UberAllesWindow() {
             }
         overlayScreenController =
             MyOverlayScreenController(
-
-                service = this, windowManager = windowManager,
+                overlayContext = overlayContext,
                 onClosed = {
                     overlayScreenController.disableView()
                     overlayButtonController.enableView()

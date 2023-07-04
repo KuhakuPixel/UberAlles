@@ -11,15 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.composables.NumberInputField
 
 
 class OverlayInputDialog(
-    createDialogOverlay: (
-        content: @Composable () -> Unit,
-    ) -> OverlayViewHolder, windowManager: WindowManager
+    overlayContext: OverlayContext
 ) : OverlayDialog(
-    createDialogOverlay = createDialogOverlay, windowManager = windowManager,
+    overlayContext
 ) {
     private val valueInput: MutableState<String> = mutableStateOf("")
 

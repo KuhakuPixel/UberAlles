@@ -10,14 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 
 class OverlayChoicesDialog(
-    createDialogOverlay: (
-        content: @Composable () -> Unit,
-    ) -> OverlayViewHolder, windowManager: WindowManager
+    overlayContext: OverlayContext
 ) : OverlayDialog(
-    createDialogOverlay = createDialogOverlay, windowManager = windowManager,
+    overlayContext
 ) {
     private val choices: MutableState<List<String>> = mutableStateOf(listOf())
     private val chosenIndex: MutableState<Int> = mutableStateOf(0)

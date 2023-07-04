@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayEnableDisableMode
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
@@ -71,12 +72,27 @@ private fun DrawOverlayDialog(
  * and content which can be set by [InitDialogBody] by subclasses
  * */
 open class OverlayDialog(
-    private val createDialogOverlay: (
-        content: @Composable () -> Unit,
-    ) -> OverlayViewHolder,
-    private val windowManager: WindowManager,
+    val overlayContext: OverlayContext
 ) {
     private var overlayViewController: OverlayViewController? = null
+
+    open fun createDialogOverlay(
+        content: @Composable () -> Unit,
+    ): OverlayViewHolder {
+
+        val dialogViewHolder = OverlayViewHolder(
+            windowManager = overlayContext.windowManager,
+            alpha = 1f,
+            service = overlayContext.service,
+        ) {
+            overlayContext.applyTheme?.invoke {
+                content()
+            }
+
+        }
+
+        return dialogViewHolder
+    }
 
     init {
 
@@ -113,7 +129,7 @@ open class OverlayDialog(
                         )
                     }
                 },
-                windowManager = windowManager,
+                windowManager = overlayContext.windowManager,
                 enableDisableMode = OverlayEnableDisableMode.CREATE_AND_DESTROY,
             )
         overlayViewController!!.enableView()

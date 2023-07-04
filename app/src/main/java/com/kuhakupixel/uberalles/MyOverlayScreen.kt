@@ -4,15 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.kuhakupixel.libuberalles.overlay.OverlayManager
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
 import com.kuhakupixel.libuberalles.overlay.service.OverlayInterface
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayViewController
-import com.kuhakupixel.libuberalles.ui.overlay.service.UberAllesWindow
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
-import android.graphics.PixelFormat
 import android.util.Log
-import android.view.WindowManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,9 +20,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayChoicesDialog
+import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayInfoDialog
+import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayInputDialog
 
 @Composable
-fun MyMainScreen() {
+fun MyMainScreen(overlayContext: OverlayContext) {
     var i: MutableState<Int> = remember { mutableStateOf(0) }
     Column() {
         Text(text = "current value ${i.value}")
@@ -37,7 +37,7 @@ fun MyMainScreen() {
 
         Button(
             onClick = fun() {
-                OverlayManager.getInfoDialog()
+                OverlayInfoDialog(overlayContext)
                     .show("Title Of the Dialog", "Body of the dialog", onConfirm = {})
             }
         ) {
@@ -46,7 +46,7 @@ fun MyMainScreen() {
 
         Button(
             onClick = fun() {
-                OverlayManager.getInputDialog()
+                OverlayInputDialog(overlayContext)
                     .show(
                         "Title Of the Dialog",
                         onConfirm = { input: String ->
@@ -60,7 +60,7 @@ fun MyMainScreen() {
 
         Button(
             onClick = fun() {
-                OverlayManager.getChoicesDialog()
+                OverlayChoicesDialog(overlayContext)
                     .show(
                         title = "Input Choices",
                         choices = listOf("Hello", "World", "Third Choice"),
@@ -78,7 +78,7 @@ fun MyMainScreen() {
 
         Button(
             onClick = fun() {
-                MyOverlayManager.getMyCustomDialog()
+                MyCustomOverlayDialog(overlayContext)
                     .show(
                         title = "Custom Dialog",
                         onConfirm = { input, isChecked ->
@@ -95,21 +95,21 @@ fun MyMainScreen() {
 }
 
 class MyOverlayScreenController(
-    val windowManager: WindowManager, val service: UberAllesWindow, val onClosed: () -> Unit
+    val overlayContext: OverlayContext, val onClosed: () -> Unit
 ) : OverlayInterface {
 
     private val hackingScreenController = OverlayViewController(
         createOverlayViewHolder = this::createOverlay,
-        windowManager = windowManager,
+        windowManager = overlayContext.windowManager,
         name = "Main Screen",
     )
 
     private fun createOverlay(): OverlayViewHolder {
 
         val hackingScreen = OverlayViewHolder(
-            windowManager = windowManager,
+            windowManager = overlayContext.windowManager,
             alpha = 0.9f,
-            service = service,
+            service = overlayContext.service,
         ) {
             UberAllesTheme(darkTheme = true) {
                 // A surface container using the 'background' color from the theme
@@ -126,7 +126,7 @@ class MyOverlayScreenController(
                                 Text("Close")
                             }
                         }
-                        MyMainScreen()
+                        MyMainScreen(overlayContext)
                     }
                 }
             }

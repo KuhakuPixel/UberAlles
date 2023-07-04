@@ -1,6 +1,5 @@
 package com.kuhakupixel.uberalles
 
-import android.view.WindowManager
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
@@ -8,16 +7,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.kuhakupixel.libuberalles.overlay.OverlayViewHolder
+import com.kuhakupixel.libuberalles.overlay.OverlayContext
 import com.kuhakupixel.libuberalles.overlay.composables.NumberInputField
 import com.kuhakupixel.libuberalles.overlay.service.dialog.OverlayDialog
 
-class MyCustomDialog(
-    createDialogOverlay: (
-        content: @Composable () -> Unit,
-    ) -> OverlayViewHolder, windowManager: WindowManager
+class MyCustomOverlayDialog(
+    overlayContext: OverlayContext
 ) : OverlayDialog(
-    createDialogOverlay = createDialogOverlay, windowManager = windowManager,
+    overlayContext
 ) {
     private val valueInput: MutableState<String> = mutableStateOf("")
     private val checked: MutableState<Boolean> = mutableStateOf(false)
