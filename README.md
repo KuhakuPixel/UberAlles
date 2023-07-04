@@ -11,7 +11,7 @@ full example of usage [here](./app/)
 ### Add Permission
 
 add code below to `AndroidManifest.xml`
-```
+```xml
     <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -36,7 +36,7 @@ in overlay view, using `ui.theme.Theme`
 
 where by default in your compose project you should have something like
 
-```
+```kotlin
 @Composable
 fun ProjectNameTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -72,7 +72,7 @@ fun ProjectNameTheme(
 
 current workaround is to just comment/remove the code where it is casting `context`
 into `Activity`
-```
+```kotlin
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
