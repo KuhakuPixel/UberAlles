@@ -1,2 +1,5 @@
+# openjdk8 seems to not work with jitpack's build system?
+# so need to upgrade to java 17
+# https://stackoverflow.com/a/76083051/14073678
 jdk:
   - openjdk17
