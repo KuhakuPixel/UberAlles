@@ -62,8 +62,7 @@ class MyOverlayServiceEntry : OverlayServiceEntry() {
             )
     }
 
-    override fun onWindowShown() {
-        super.onWindowShown()
+    override fun onOverlayServiceStarted() {
         overlayDraggableButtonController.enableView()
     }
 }

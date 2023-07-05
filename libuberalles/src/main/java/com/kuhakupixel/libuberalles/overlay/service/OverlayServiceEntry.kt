@@ -1,4 +1,5 @@
 package com.kuhakupixel.libuberalles.ui.overlay.service
+
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,10 +13,9 @@ import androidx.core.app.NotificationCompat
 import com.kuhakupixel.libuberalles.overlay.FOREGROUND_SERVICE_NOTIFICATION_ID
 import com.kuhakupixel.libuberalles.overlay.logd
 
-open class OverlayServiceEntry : Service() {
+abstract class OverlayServiceEntry : Service() {
     val state = ServiceState()
     open val windowManager get() = getSystemService(WINDOW_SERVICE) as WindowManager
-
 
     override fun onCreate() {
         super.onCreate()
@@ -25,14 +25,11 @@ open class OverlayServiceEntry : Service() {
         return null
     }
 
-    open fun onWindowShown() {
-
-    }
-
+    abstract fun onOverlayServiceStarted()
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         logd("FloatingService onStartCommand")
         startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
-        onWindowShown()
+        onOverlayServiceStarted()
         return START_STICKY
     }
 
