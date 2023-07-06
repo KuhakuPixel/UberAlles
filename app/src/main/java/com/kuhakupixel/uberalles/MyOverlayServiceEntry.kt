@@ -1,13 +1,15 @@
 package com.kuhakupixel.uberalles
 
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import com.kuhakupixel.libuberalles.overlay.OverlayContext
-import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableButtonController
+import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableViewController
 import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
 
@@ -15,7 +17,7 @@ class MyOverlayServiceEntry : OverlayServiceEntry() {
     val TRASH_SIZE_DP = 90
     val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
-    private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
+    private lateinit var overlayDraggableViewController: OverlayDraggableViewController
     private lateinit var overlayScreenController: MyOverlayScreenController
     override fun onCreate() {
         super.onCreate()
@@ -35,34 +37,40 @@ class MyOverlayServiceEntry : OverlayServiceEntry() {
             },
         )
         //
-        overlayDraggableButtonController =
-            OverlayDraggableButtonController(
+        overlayDraggableViewController =
+            OverlayDraggableViewController(
                 windowManager = windowManager,
                 service = this,
-                onClick = {
-                    overlayDraggableButtonController.disableView()
-                    overlayScreenController.enableView()
-                },
                 onDestroyed = {
                     Log.d("UberAlles", "Button Destroyed")
                     this.stopSelf()
                 },
                 buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
-                trashSizeDp = TRASH_SIZE_DP
+                trashSizeDp = TRASH_SIZE_DP,
+                viewAlpha = 0.8f,
             ) {
-                Text("Button")
+                Image(
+                    painter = painterResource(R.drawable.icon),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clickable {
+                            overlayDraggableViewController.disableView()
+                            overlayScreenController.enableView()
+                        },
+                )
             }
         overlayScreenController =
             MyOverlayScreenController(
                 overlayContext = overlayContext,
                 onClosed = {
                     overlayScreenController.disableView()
-                    overlayDraggableButtonController.enableView()
+                    overlayDraggableViewController.enableView()
                 },
             )
     }
 
     override fun onOverlayServiceStarted() {
-        overlayDraggableButtonController.enableView()
+        overlayDraggableViewController.enableView()
     }
 }

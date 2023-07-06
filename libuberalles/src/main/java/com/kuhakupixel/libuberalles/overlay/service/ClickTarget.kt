@@ -1,7 +1,7 @@
 package com.kuhakupixel.libuberalles.overlay.service
 
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
@@ -13,18 +13,16 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-// doitwrong
 @Composable
 fun ClickTarget(
     serviceState: ServiceState,
-    controller: OverlayDraggableButtonController,
+    controller: OverlayDraggableViewController,
     overlayState: OverlayState,
     viewHolder: OverlayViewHolder,
     onDropOnTrash: () -> Unit,
-    onClick: () -> Unit,
-    buttonContent: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    Button(
+    Box(
         modifier = Modifier
             .pointerInput(Unit) {
                 detectDragGestures(
@@ -62,8 +60,7 @@ fun ClickTarget(
                     },
                 )
             },
-        onClick = { onClick() },
     ) {
-        buttonContent()
+        content()
     }
 }

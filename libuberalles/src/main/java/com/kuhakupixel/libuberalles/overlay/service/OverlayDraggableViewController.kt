@@ -17,13 +17,13 @@ import com.kuhakupixel.libuberalles.overlay.px
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
-class OverlayDraggableButtonController(
+class OverlayDraggableViewController(
     val windowManager: WindowManager,
     val service: OverlayServiceEntry,
-    val onClick: () -> Unit,
     val onDestroyed: () -> Unit,
     val buttonRadiusDp: Int,
     val trashSizeDp: Int,
+    val viewAlpha: Float = 1.0f,
     val content: @Composable () -> Unit,
 ) : OverlayInterface {
 
@@ -92,7 +92,7 @@ class OverlayDraggableButtonController(
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT
             ),
-            alpha = 0.9f, service = service,
+            alpha = viewAlpha, service = service,
         )
         overlayButtonClickTarget.setContent {
             ClickTarget(
@@ -103,10 +103,7 @@ class OverlayDraggableButtonController(
                 onDropOnTrash = {
                     this.disableView()
                 },
-                onClick = {
-                    onClick()
-                },
-                buttonContent = content,
+                content = content,
             )
         }
         return overlayButtonClickTarget
