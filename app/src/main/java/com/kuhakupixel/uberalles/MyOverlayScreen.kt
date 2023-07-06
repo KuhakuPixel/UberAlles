@@ -120,23 +120,18 @@ class MyOverlayScreenController(
             alpha = 0.9f,
             service = overlayContext.service,
         ) {
-            UberAllesTheme(darkTheme = true) {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(modifier = Modifier.fillMaxSize()) {
+            overlayContext.applyTheme?.invoke {
+                Column(modifier = Modifier.fillMaxSize()) {
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center,
-                        ) {
-                            Button(onClick = onClosed) {
-                                Text("Close")
-                            }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Button(onClick = onClosed) {
+                            Text("Close")
                         }
-                        MyMainScreen(overlayContext)
                     }
+                    MyMainScreen(overlayContext)
                 }
             }
         }
