@@ -1,4 +1,6 @@
 # UberAlles
+[![](https://jitpack.io/v/KuhakuPixel/UberAlles.svg)](https://jitpack.io/#KuhakuPixel/UberAlles)
+
 `UberAlles` the german word for `above all`
 
 is an experimental library for creating on top of everything view
@@ -52,24 +54,14 @@ if (!Settings.canDrawOverlays(context)) {
 }
 
 ```
-### Making Draggable Overlay Button
+### Making Overlay Service
+
+visit [here](./app/src/main/java/com/kuhakupixel/uberalles/MyOverlayServiceEntry.kt) for full code
 ```kotlin
-import android.util.Log
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import com.kuhakupixel.libuberalles.overlay.OverlayContext
-import com.kuhakupixel.libuberalles.overlay.service.OverlayDraggableButtonController
-import com.kuhakupixel.libuberalles.ui.overlay.service.OverlayServiceEntry
 import com.kuhakupixel.uberalles.ui.theme.UberAllesTheme
 
 class MyOverlayServiceEntry : OverlayServiceEntry() {
-    val TRASH_SIZE_DP = 90
-    val OVERLAY_BUTTON_DEFAULT_SIZE_DP = 85
 
-    private lateinit var overlayDraggableButtonController: OverlayDraggableButtonController
     override fun onCreate() {
         super.onCreate()
         // Initialize Overlay Context for drawing dialog and etc
@@ -87,33 +79,16 @@ class MyOverlayServiceEntry : OverlayServiceEntry() {
                 }
             },
         )
-        //
-        overlayDraggableButtonController =
-            OverlayDraggableButtonController(
-                windowManager = windowManager,
-                service = this,
-                onClick = {
-                    overlayDraggableButtonController.disableView()
-                },
-                onDestroyed = {
-                    Log.d("UberAlles", "Button Destroyed")
-                    this.stopSelf()
-                },
-                buttonRadiusDp = OVERLAY_BUTTON_DEFAULT_SIZE_DP,
-                trashSizeDp = TRASH_SIZE_DP
-            ) {
-                Text("Button")
-            }
+        // initialize your view here
     }
 
-    override fun onWindowShown() {
-        super.onWindowShown()
-        overlayDraggableButtonController.enableView()
+    override fun onOverlayServiceStarted() {
+        // enable your view here
     }
 }
 ```
 
-starting the button
+starting overlay service
 ```kotlin 
 fun startOverlayButton(context: Context) {
     val intent = Intent(context.applicationContext, MyOverlayServiceEntry::class.java)
