@@ -25,7 +25,7 @@ private fun DrawOverlayDialog(
     title: String,
     onConfirm: () -> Unit,
     onClose: () -> Unit,
-    body: @Composable (modifier: Modifier) -> Unit,
+    body: @Composable () -> Unit,
 ) {
 
     Column(
@@ -41,7 +41,9 @@ private fun DrawOverlayDialog(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.weight(0.1f),
         )
-        body(Modifier.weight(0.8f))
+        Box(Modifier.weight(0.8f)) {
+            body()
+        }
         // Cancel - Okay Button
         Row(
             Modifier
@@ -71,7 +73,7 @@ private fun DrawOverlayDialog(
  * which have a title, a cancel, confirm button
  * and content which can be set by overriding [DialogBody]
  * */
-open class OverlayDialog(
+abstract class OverlayDialog(
     val overlayContext: OverlayContext, val alpha: Float = 1.0f
 ) {
     private var overlayViewController: OverlayViewController? = null
@@ -100,14 +102,11 @@ open class OverlayDialog(
     }
 
     @Composable
-    open fun DialogBody() {
-    }
-
+    abstract fun DialogBody()
 
     /**
      * open the dialog
      * */
-
     open fun show(title: String, onConfirm: () -> Unit, onClose: () -> Unit = {}) {
         this.overlayViewController =
             OverlayViewController(
@@ -115,12 +114,7 @@ open class OverlayDialog(
                     return createDialogOverlay {
                         DrawOverlayDialog(
                             title = title,
-                            body =
-                            { modifier: Modifier ->
-                                Box(modifier = modifier) {
-                                    DialogBody()
-                                }
-                            },
+                            body = { DialogBody() },
                             onConfirm = onConfirm,
                             onClose = {
                                 onClose()
