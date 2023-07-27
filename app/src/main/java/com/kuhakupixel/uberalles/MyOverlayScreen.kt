@@ -67,12 +67,15 @@ fun MyMainScreen(overlayContext: OverlayContext) {
             Text("Show Input Dialog")
         }
 
+        val choices: MutableList<String> = mutableListOf()
+        for (idx in 1..100)
+            choices.add("Choice ${idx}")
         Button(
             onClick = fun() {
                 OverlayChoicesDialog(overlayContext)
                     .show(
                         title = "Input Choices",
-                        choices = listOf("Hello", "World", "Third Choice"),
+                        choices = choices,
                         chosenIndex = 0,
                         onConfirm = { index, input ->
                             Log.d("UberAlles", "input is $input, index is $index")

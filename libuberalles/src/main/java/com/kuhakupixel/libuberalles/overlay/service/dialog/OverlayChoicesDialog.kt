@@ -4,6 +4,8 @@ import android.view.WindowManager
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +25,7 @@ class OverlayChoicesDialog(
 
     @Composable
     override fun DialogBody() {
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
             for (i in 0 until choices.value.size) {
                 Row {
                     Text(choices.value[i], modifier = Modifier.weight(0.8f))
