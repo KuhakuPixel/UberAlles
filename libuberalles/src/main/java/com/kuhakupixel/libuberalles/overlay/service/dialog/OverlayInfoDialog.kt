@@ -25,9 +25,9 @@ class OverlayInfoDialog(
         )
     }
 
-    fun show(title: String, text: String, onConfirm: () -> Unit) {
+    fun show(title: String, text: String, onConfirm: () -> Unit, onClose: () -> Unit = {}) {
         dialogText.value = text
-        super.show(title = title, onConfirm = onConfirm, onClose = {})
+        super.show(title = title, onConfirm = onConfirm, onClose = onClose)
     }
 
 
