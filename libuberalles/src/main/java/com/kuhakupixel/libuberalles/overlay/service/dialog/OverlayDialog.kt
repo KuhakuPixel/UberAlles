@@ -103,6 +103,7 @@ abstract class OverlayDialog(
      * close this dialog
      * */
     open fun close(){
+        // TODO: also call onClose
         this.overlayViewController!!.disableView()
     }
 
