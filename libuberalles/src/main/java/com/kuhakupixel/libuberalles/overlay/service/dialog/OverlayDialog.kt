@@ -1,6 +1,5 @@
 package com.kuhakupixel.libuberalles.overlay.service.dialog
 
-import android.view.WindowManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -96,13 +95,16 @@ abstract class OverlayDialog(
         return dialogViewHolder
     }
 
-    init {
-
-
-    }
 
     @Composable
     abstract fun DialogBody()
+
+    /**
+     * close this dialog
+     * */
+    open fun close(){
+        this.overlayViewController!!.disableView()
+    }
 
     /**
      * open the dialog
@@ -118,7 +120,7 @@ abstract class OverlayDialog(
                             onConfirm = onConfirm,
                             onClose = {
                                 onClose()
-                                this.overlayViewController!!.disableView()
+                                close()
                             },
                         )
                     }

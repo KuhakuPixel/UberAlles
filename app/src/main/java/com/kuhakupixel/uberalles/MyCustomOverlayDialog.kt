@@ -2,6 +2,7 @@ package com.kuhakupixel.uberalles
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,13 @@ class MyCustomOverlayDialog(
     @Composable
     override fun DialogBody() {
         Column {
+            Button(
+                onClick = {
+                    close()
+                },
+            ) {
+                Text("Another button to close dialog")
+            }
             NumberInputField(
                 value = valueInput.value,
                 onValueChange = { value ->
